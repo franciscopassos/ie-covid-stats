@@ -1,3 +1,6 @@
 # Environments
 .env
 env/
+
+# IDE
+.vscode/
