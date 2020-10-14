@@ -19,13 +19,20 @@ def get_month_pages():
             for li in header.find_next_sibling("ul").find_all("li"):
                 results.append(f"{DOMAIN}{li.a['href']}")
     return results
-    
+
+
+def get_date_urls(page_urls):
+    date_urls = []
+    for page_url in page_urls:
+        resp = requests.get(page_url)
+        soup = bs4.BeautifulSoup(resp.text, 'html.parser')
+        date_urls.extend(soup.find_all("h3"))
+    return date_urls
+
 
 def main():
     page_urls = get_month_pages()
-    print(page_urls)
-    # date_urls = get_date_urls(page_urls)
-    # fetch_page_urls()
+    date_urls = get_date_urls(page_urls)
 
 
 if __name__ == "__main__":
